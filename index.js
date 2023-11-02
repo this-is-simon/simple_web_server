@@ -11,7 +11,13 @@ const friends = [
 const server = http.createServer((req, res) => {
   const items = req.url.split("/");
   // /friends/1 => ["", "friends", "2"];
-  if (items[1] === "friends") {
+  if (req.method === "POST" && items[1] === "friends") {
+    req.on("data", (data) => {
+      const friend = data.toString();
+      friends.push(JSON.parse(friend));
+    });
+    req.pipe(res);
+  } else if (req.method === "GET" && items[1] === "friends") {
     res.writeHead(200, {
       "Content-Type": "application/json",
     });
