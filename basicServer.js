@@ -1,16 +1,10 @@
 const http = require("http");
+const friends = require("./data");
 
 const PORT = 3001;
 
-const friends = [
-  { id: 0, name: "Nikola Tesla" },
-  { id: 1, name: "Sir Isaac Newton" },
-  { id: 2, name: "Marie Curie" },
-];
-
 const server = http.createServer((req, res) => {
   const items = req.url.split("/");
-  // /friends/1 => ["", "friends", "2"];
   if (req.method === "POST" && items[1] === "friends") {
     req.on("data", (data) => {
       const friend = data.toString();
