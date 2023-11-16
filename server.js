@@ -5,6 +5,13 @@ const app = express();
 
 const PORT = 3001;
 
+app.use((req, res, next) => {
+  const start = Date.now();
+  next();
+  const delta = Date.now() - start;
+  console.log(`${req.method} ${req.url} ${delta}ms`);
+});
+
 app.get("/friends", (req, res) => {
   console.log("hit me");
   res.json(friends);
