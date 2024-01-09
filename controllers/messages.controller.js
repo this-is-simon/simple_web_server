@@ -1,7 +1,8 @@
 const model = require("../models/messages.model");
+const path = require("path");
 
 function getMessages(req, res) {
-  res.json(model);
+  res.sendFile(path.join(__dirname, "..", "public", "images", "seastar.webp"));
 }
 
 function postMessage(req, res) {
